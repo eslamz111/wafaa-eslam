@@ -27,6 +27,7 @@ const Index = () => {
   const { data: songs } = useFirestoreCollection<{
     id: string;
     title?: string;
+    audio_url?: string;
     audioUrl?: string;
     isFavorite?: boolean;
   }>("songs");
@@ -54,7 +55,7 @@ const Index = () => {
     <div className="min-h-screen bg-background scroll-smooth">
       <Hero>
         <MusicPlayer
-          audioUrl={favoriteSong?.audioUrl}
+          audioUrl={favoriteSong?.audio_url || favoriteSong?.audioUrl}
           songTitle={favoriteSong?.title}
           autoPlay={true}
         />

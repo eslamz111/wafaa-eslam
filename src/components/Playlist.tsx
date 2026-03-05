@@ -2,11 +2,13 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Music } from "lucide-react";
 import { useFirestoreCollection } from "@/hooks/useFirestoreCollection";
+import MusicPlayer from "@/components/MusicPlayer";
 
 interface SongItem {
   id: string;
   title?: string;
   artist?: string;
+  audio_url?: string;
   audioUrl?: string;
 }
 
@@ -53,36 +55,37 @@ const Playlist = () => {
         </p>
 
         <div className="max-w-md mx-auto space-y-4">
-          {songs.map((song, index) => (
-            <motion.div
-              key={song.id}
-              className="romantic-card flex items-center gap-4"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.15 }}
-              whileHover={{ scale: 1.02 }}
-            >
-              <div className="w-12 h-12 rounded-full romantic-gradient flex items-center justify-center shrink-0">
-                <Music className="w-6 h-6 text-primary-foreground" />
-              </div>
-              <div className="flex-1 w-full min-w-0">
-                <h4 className="font-body font-bold text-foreground truncate">{song.title}</h4>
-                {song.artist && (
-                  <p className="text-sm text-muted-foreground font-body truncate">{song.artist}</p>
+          {songs.map((song, index) => {
+            const songUrl = song.audio_url || song.audioUrl;
+            return (
+              <motion.div
+                key={song.id}
+                className="romantic-card flex flex-col items-start gap-4"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.15 }}
+                whileHover={{ scale: 1.02 }}
+              >
+                <div className="flex items-center gap-4 w-full">
+                  <div className="w-12 h-12 rounded-full romantic-gradient flex items-center justify-center shrink-0">
+                    <Music className="w-6 h-6 text-primary-foreground" />
+                  </div>
+                  <div className="flex-1 w-full min-w-0">
+                    <h4 className="font-body font-bold text-foreground truncate">{song.title}</h4>
+                    {song.artist && (
+                      <p className="text-sm text-muted-foreground font-body truncate">{song.artist}</p>
+                    )}
+                  </div>
+                </div>
+                {songUrl && (
+                  <div className="w-full mt-2">
+                    <MusicPlayer audioUrl={songUrl} />
+                  </div>
                 )}
-                {song.audioUrl && (
-                  <audio
-                    controls
-                    src={song.audioUrl}
-                    className="w-full mt-3 h-10 outline-none"
-                    controlsList="nodownload noplaybackrate"
-                    preload="none"
-                  />
-                )}
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
