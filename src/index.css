@@ -1,0 +1,297 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 350 30% 97%;
+    --foreground: 350 25% 15%;
+
+    --card: 350 35% 95%;
+    --card-foreground: 350 25% 15%;
+
+    --popover: 350 30% 97%;
+    --popover-foreground: 350 25% 15%;
+
+    --primary: 340 65% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 350 30% 92%;
+    --secondary-foreground: 350 25% 20%;
+
+    --muted: 350 20% 93%;
+    --muted-foreground: 350 15% 45%;
+
+    --accent: 38 75% 55%;
+    --accent-foreground: 38 80% 15%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 350 25% 88%;
+    --input: 350 25% 88%;
+    --ring: 340 65% 55%;
+
+    --radius: 0.75rem;
+
+    --rose-soft: 350 60% 90%;
+    --rose-deep: 340 70% 40%;
+    --gold: 38 75% 55%;
+    --gold-light: 38 60% 85%;
+    --cream: 40 30% 96%;
+
+    --font-display: 'Aref Ruqaa', serif;
+    --font-body: 'Tajawal', sans-serif;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 340 20% 8%;
+    --foreground: 350 20% 90%;
+
+    --card: 340 18% 12%;
+    --card-foreground: 350 20% 90%;
+
+    --popover: 340 20% 10%;
+    --popover-foreground: 350 20% 90%;
+
+    --primary: 340 65% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 340 15% 16%;
+    --secondary-foreground: 350 20% 85%;
+
+    --muted: 340 12% 18%;
+    --muted-foreground: 350 15% 55%;
+
+    --accent: 38 65% 50%;
+    --accent-foreground: 38 80% 90%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 340 15% 20%;
+    --input: 340 15% 20%;
+    --ring: 340 65% 60%;
+
+    --rose-soft: 340 30% 18%;
+    --rose-deep: 340 70% 50%;
+    --gold: 38 65% 50%;
+    --gold-light: 38 40% 25%;
+    --cream: 340 15% 12%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+    font-family: var(--font-body);
+    transition: background-color 0.7s ease, color 0.7s ease;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer components {
+  .section-container {
+    @apply max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    @apply text-3xl sm:text-4xl lg:text-5xl text-primary text-center mb-8;
+  }
+
+  .romantic-gradient {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+  }
+
+  .gold-text {
+    color: hsl(var(--accent));
+  }
+
+  .romantic-card {
+    @apply bg-card rounded-2xl p-6 sm:p-8 shadow-lg border border-border;
+    background: linear-gradient(145deg, hsl(var(--card)), hsl(var(--rose-soft) / 0.5));
+  }
+
+  .glass-card {
+    @apply rounded-2xl p-6 backdrop-blur-md border border-border;
+    background: hsl(var(--background) / 0.7);
+  }
+
+  /* Admin dashboard styles */
+  .admin-input {
+    @apply w-full px-4 py-3 rounded-xl bg-background border border-border font-body text-foreground;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary/50 transition-shadow;
+  }
+
+  .admin-save-btn {
+    @apply w-full py-3 rounded-xl romantic-gradient text-primary-foreground font-body text-lg;
+    @apply flex items-center justify-center gap-2 disabled:opacity-60 hover:opacity-90 transition-opacity;
+  }
+}
+
+@layer utilities {
+  .text-gradient-romantic {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .float-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  @keyframes heartbeat {
+
+    0%,
+    100% {
+      transform: scale(1);
+    }
+
+    14% {
+      transform: scale(1.15);
+    }
+
+    28% {
+      transform: scale(1);
+    }
+
+    42% {
+      transform: scale(1.15);
+    }
+
+    70% {
+      transform: scale(1);
+    }
+  }
+
+  .heartbeat {
+    animation: heartbeat 2s ease-in-out infinite;
+  }
+
+  @keyframes sparkle {
+
+    0%,
+    100% {
+      opacity: 0.3;
+      transform: scale(0.8);
+    }
+
+    50% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+  }
+
+  .sparkle {
+    animation: sparkle 3s ease-in-out infinite;
+  }
+
+  /* Floating hearts - pure CSS */
+  .floating-hearts-container {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .floating-heart {
+    position: absolute;
+    bottom: -20px;
+    color: hsl(340, 65%, 55%);
+    animation: floatHeart linear infinite;
+  }
+
+  @keyframes floatHeart {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 0;
+    }
+
+    10% {
+      opacity: 1;
+    }
+
+    90% {
+      opacity: 0.5;
+    }
+
+    100% {
+      transform: translateY(-100vh) rotate(25deg);
+      opacity: 0;
+    }
+  }
+
+  /* Countdown card glow */
+  .countdown-card {
+    position: relative;
+  }
+
+  .countdown-card::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 1rem;
+    background: linear-gradient(135deg, hsl(340 65% 55% / 0.3), hsl(38 75% 55% / 0.3));
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: -1;
+    filter: blur(4px);
+  }
+
+  .countdown-card:hover::before {
+    opacity: 1;
+    animation: cardGlow 2s ease-in-out infinite;
+  }
+
+  @keyframes cardGlow {
+
+    0%,
+    100% {
+      opacity: 0.5;
+    }
+
+    50% {
+      opacity: 1;
+    }
+  }
+}
