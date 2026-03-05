@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Heart, LogIn, Lock } from "lucide-react";
+import { Heart, LogIn, Lock, X } from "lucide-react";
 
 const ADMIN_PASSWORD = "123456789";
 
@@ -32,11 +32,18 @@ const AdminLogin = () => {
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-rose-soft via-background to-gold-light p-4">
             <motion.div
-                className="romantic-card max-w-md w-full p-8"
+                className="romantic-card max-w-md w-full p-8 relative"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
             >
+                <button
+                    onClick={() => navigate("/")}
+                    className="absolute top-4 left-4 p-2 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-full transition-all"
+                    title="العودة للصفحة الرئيسية"
+                >
+                    <X className="w-5 h-5" />
+                </button>
                 <div className="text-center mb-8">
                     <Heart className="w-12 h-12 text-primary mx-auto mb-4 heartbeat" fill="currentColor" />
                     <h1 className="font-display text-3xl text-primary mb-2">لوحة التحكم ❤️</h1>

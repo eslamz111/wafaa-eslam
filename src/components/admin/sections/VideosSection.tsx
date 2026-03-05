@@ -73,24 +73,26 @@ const VideosSection = () => {
                 {items.map((item) => {
                     const videoId = item.youtubeUrl ? extractYouTubeId(item.youtubeUrl) : null;
                     return (
-                        <div key={item.id} className="romantic-card p-4 flex items-center gap-4">
-                            <div className="w-24 h-16 rounded-lg overflow-hidden bg-secondary shrink-0">
+                        <div key={item.id} className="romantic-card p-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                            <div className="w-full sm:w-32 h-32 sm:h-20 rounded-lg overflow-hidden bg-secondary shrink-0 relative group">
                                 {videoId ? (
                                     <img src={getYouTubeThumbnail(videoId)} alt="" className="w-full h-full object-cover" />
                                 ) : (
                                     <div className="w-full h-full flex items-center justify-center"><Video className="w-6 h-6 text-muted-foreground" /></div>
                                 )}
                             </div>
-                            <div className="flex-1 min-w-0">
-                                <p className="font-body text-sm text-foreground truncate">{item.caption}</p>
+                            <div className="flex-1 w-full min-w-0 space-y-1">
+                                <p className="font-body text-sm text-foreground truncate">{item.caption || "بدون كابشن"}</p>
                                 <p className="font-body text-xs text-muted-foreground truncate" dir="ltr">{item.youtubeUrl}</p>
                             </div>
-                            <div className="flex flex-col gap-2">
-                                <button onClick={() => handleEdit(item)} className="text-primary hover:bg-primary/10 p-2 rounded-lg transition-colors">
+                            <div className="flex sm:flex-col gap-2 w-full sm:w-auto mt-2 sm:mt-0 justify-end border-t sm:border-t-0 border-border/50 pt-3 sm:pt-0">
+                                <button onClick={() => handleEdit(item)} className="text-primary hover:bg-primary/10 px-4 py-2 sm:p-2 rounded-lg transition-colors flex items-center justify-center gap-2 flex-1 sm:flex-none">
                                     <Pencil className="w-4 h-4" />
+                                    <span className="text-xs font-body sm:hidden">تعديل</span>
                                 </button>
-                                <button onClick={() => handleDelete(item.id)} className="text-destructive hover:bg-destructive/10 p-2 rounded-lg transition-colors">
+                                <button onClick={() => handleDelete(item.id)} className="text-destructive hover:bg-destructive/10 px-4 py-2 sm:p-2 rounded-lg transition-colors flex items-center justify-center gap-2 flex-1 sm:flex-none">
                                     <Trash2 className="w-4 h-4" />
+                                    <span className="text-xs font-body sm:hidden">حذف</span>
                                 </button>
                             </div>
                         </div>
